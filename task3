@@ -1,0 +1,27 @@
+#include<iostream>
+#include<string>
+using namespace std;
+string displayinReverse(const string name,int index=0) {
+	if (index == name.length()) {
+		return "";
+	}
+	else {
+		return displayinReverse(name,index+1)+name[index];
+		
+	}
+}
+int main() {
+
+	cout << "John Doe" << endl;
+	cout << "REVERSE : " << endl;
+	cout<<displayinReverse("John Doe");
+	cout << endl;
+	cout << "Alice" << endl;
+	cout << "REVERSE : " << endl;
+	cout << displayinReverse("Alice");
+
+	return 0;
+}
+
+
+ 

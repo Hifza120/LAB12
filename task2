@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+
+// Structure representing a node in the binary tree (BST).
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    // Constructor to create a new node.
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+// Generic inorder traversal function (recursive).
+void inorderTraversal(TreeNode* root) {
+    // Base case: if the node is null, just return.
+    if (root == nullptr) {
+        return;
+    }
+
+    // Recurse on the left subtree.
+    inorderTraversal(root->left);
+    
+    // Visit the current node (root).
+    cout << root->val << " ";
+
+    // Recurse on the right subtree.
+    inorderTraversal(root->right);
+}
+
+// Utility function to insert a new node into the BST.
+TreeNode* insert(TreeNode* root, int value) {
+    // If the tree is empty, create a new node.
+    if (root == nullptr) {
+        return new TreeNode(value);
+    }
+
+    // If the value is smaller than the root, insert it into the left subtree.
+    if (value < root->val) {
+        root->left = insert(root->left, value);
+    }
+    // If the value is larger than the root, insert it into the right subtree.
+    else if (value > root->val) {
+        root->right = insert(root->right, value);
+    }
+
+    // Return the root node after insertion.
+    return root;
+}
+
+int main() {
+    // Create an empty BST.
+    TreeNode* root = nullptr;
+
+    // Insert some book IDs into the BST.
+    root = insert(root, 50);
+    root = insert(root, 30);
+    root = insert(root, 70);
+    root = insert(root, 20);
+    root = insert(root, 40);
+    root = insert(root, 60);
+    root = insert(root, 80);
+
+    // Print the inorder traversal of the BST (sorted order).
+    cout << "Inorder traversal of the BST: ";
+    inorderTraversal(root);  // This should print: 20 30 40 50 60 70 80
+
+    return 0;
+}
+

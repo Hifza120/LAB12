@@ -1,0 +1,65 @@
+#include<iostream>
+using namespace std;
+struct TreeNode {
+	int data;
+	TreeNode* left;
+	TreeNode* right;
+	TreeNode(int d) :data(d), left(nullptr), right(nullptr) {}
+};
+void insert(TreeNode*& root, int book_id) {
+	if (root == nullptr) {
+		TreeNode* nn = new TreeNode(book_id);
+		root = nn;
+	}
+	else {
+			if (root->data > book_id) {
+				if (root->left == nullptr) {
+					TreeNode* nn = new TreeNode(book_id);
+					root->left = nn;
+
+				}
+				else {
+					insert(root->left, book_id);
+				}
+			}
+			if (root->data < book_id) {
+				if (root->right == nullptr) {
+					TreeNode* nn = new TreeNode(book_id);
+					root->right = nn;
+
+				}
+				else {
+					insert(root->right, book_id);
+				}
+			}	
+
+	}
+}
+void inorderTraversal(TreeNode* root) {
+	// Base case: if the node is null, just return.
+	if (root == nullptr) {
+		return;
+	}
+
+	// Recurse on the left subtree.
+	inorderTraversal(root->left);
+
+	// Visit the current node (root).
+	cout << root->data << " ";
+
+	// Recurse on the right subtree.
+	inorderTraversal(root->right);
+}
+
+int main() {
+
+	TreeNode* root = nullptr;
+	insert(root, 50);
+	insert(root, 30);
+	insert(root, 70);
+	insert(root, 60);
+	insert(root, 40);
+	inorderTraversal(root);
+	return 0;
+}
+
